@@ -13,7 +13,16 @@ As part of ongoing Security Enhancements, we are planning to upgrade the SOAP AP
 
 You must upgrade the SOAP Authentication to use P12 by February 13, 2025.
 
-> **IMPORTANT** : This update is currently available only for the Java SOAP Toolkit. The updated SDK is available here on GitHub: Java SOAP toolkit. Other toolkits will be available in January 2025. This Java SOAP Toolkit update only works with WSDL or XSD version 1.219 or earlier.
+> **IMPORTANT** : This update is currently available only for the C# and Java SOAP Toolkit.
+> 
+> The following updated SDKs are available here on GitHub:
+> 
+> - Java SOAP toolkit
+> - C# SOAP toolkit
+> 
+> Other toolkits will be available in January 2025.
+> 
+> This Java SOAP Toolkit update only works with WSDL or XSD version 1.219 or earlier.
 
 ## Prerequisites
 
