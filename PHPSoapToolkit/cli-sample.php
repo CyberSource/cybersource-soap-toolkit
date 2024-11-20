@@ -8,7 +8,7 @@ define( 'WSDL_URL', 'https://ics2wstest.ic3.com/commerce/1.x/transactionProcesso
 
 try {
     $soapClient = new ExtendedClientWithToken(
-        WSDL_URL, 
+        WSDL_URL,
         array(
             'SSL' => array(
                     'KEY_ALIAS'     => 'YOUR KEY ALIAS',
