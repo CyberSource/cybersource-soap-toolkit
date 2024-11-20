@@ -6,8 +6,6 @@ require_once("ExtendedClientWithToken.php");
 define( 'MERCHANT_ID', 'YOUR MERCHANT ID' );
 define( 'WSDL_URL', 'https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.219.wsdl' );
 
-define('XMLLINT_PATH', 'C:\\ProgramData\\chocolatey\\lib\\xsltproc\\dist\\bin\\xmllint.exe');
-
 try {
     $soapClient = new ExtendedClientWithToken(
         WSDL_URL, 
