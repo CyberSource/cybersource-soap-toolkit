@@ -59,7 +59,8 @@ class ExtendedClientWithToken extends SoapClient
      * @param bool $oneWay
      * @return string
      */
-    function __doRequest($request, $location, $action, $version, $oneWay = false) : ?string
+    #[\ReturnTypeWillChange]
+    function __doRequest($request, $location, $action, $version, $oneWay = false)
     {
         // Load request and add security headers
         $requestDom = new DOMDocument('1.0', 'utf-8');
