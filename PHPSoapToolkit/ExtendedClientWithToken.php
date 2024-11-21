@@ -84,7 +84,7 @@ class ExtendedClientWithToken extends SoapClient
         $securityElement = $headerNode->appendChild($requestDom->createElementNS(self::WSSE_NS, 'wsse:Security'));
 
         $privateKeyId = '';
-        
+
         // Update with token data
         $securityElement->appendChild($this->securityUtility->generateSecurityToken($requestDom,
                                             $this->propertiesUtility->getFilePath($this->_ssl_options),
