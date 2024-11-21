@@ -116,5 +116,5 @@ logs
 *.p12
 **/Obsolete
 **/node_modules
-
+**/.idea
 .vscode
