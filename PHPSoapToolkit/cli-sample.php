@@ -40,7 +40,7 @@ try {
     $request->clientLibraryVersion = phpversion();
     $request->clientEnvironment = php_uname();
 
-    // This section contains a sample transaction request for the authorization 
+    // This section contains a sample transaction request for the authorization
     // service with complete billing, payment card, and purchase (two items) information.
     $ccAuthService = new stdClass();
     $ccAuthService->run = "true";
