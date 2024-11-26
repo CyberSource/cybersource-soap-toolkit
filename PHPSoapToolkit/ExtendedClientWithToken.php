@@ -110,55 +110,6 @@ class ExtendedClientWithToken extends SoapClient
 
         return parent::__doRequest($request, $location, $action, $version, $oneWay);
     }
-
-    function getCurlObject($options = array())
-    {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL,             $options['http']['url']);
-        curl_setopt($curl, CURLOPT_TIMEOUT,         $this->_timeout);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT,  $this->_timeout);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER,  true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER,      $options['http']['header']);
-        curl_setopt($curl, CURLOPT_POST,            true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS,      $options['http']['content']);
-        curl_setopt($curl, CURLOPT_USERAGENT,       $options['http']['user_agent']);
-        curl_setopt($curl, CURLOPT_VERBOSE,         1);
-        curl_setopt($curl, CURLOPT_HEADER,          1);
-        curl_setopt($curl, CURLOPT_FAILONERROR,     true);
-        curl_setopt($curl, CURLOPT_SSLCERT,         $this->getFilePath($options));
-        curl_setopt($curl, CURLOPT_SSLCERTTYPE,     'P12');
-        curl_setopt($curl, CURLOPT_SSLCERTPASSWD,   $options['ssl']['KEY_PASS']);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER,  false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,  false);
-
-        return $curl;
-    }
-
-    function getFilePath($settings = array())
-    {
-        $keyDirectory = $settings['ssl']['KEY_DIRECTORY'];
-        $keyFile = $settings['ssl']['KEY_FILE'];
-
-        return rtrim($keyDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $keyFile;
-    }
-
-    /**
-     * Sample UUID function, based on random number or provided data
-     *
-     * @param mixed $data
-     * @return string
-     */
-    function getUUID($data = null)
-    {
-        if ($data === null)
-        {
-            $data = microtime() . uniqid();
-        }
-
-        $id = md5($data);
-
-        return sprintf('%08s-%04s-%04s-%04s-%012s', substr($id, 0, 8), substr($id, 8, 4), substr($id, 12, 4), substr(16, 4), substr($id, 20));
-    }
 }
 
 ?>
