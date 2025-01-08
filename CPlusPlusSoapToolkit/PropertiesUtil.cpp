@@ -12,7 +12,8 @@
 const std::string PROPERTIES_PATH = "toolkit.properties";
 std::map<std::string, std::string> merchantProperties;
 
-// Function to read properties from a file
+// Function to read properties from a file.
+// Must be called before calling other methods in this class.
 std::map<std::string, std::string> loadProperties() {
     std::string filePath = PROPERTIES_PATH;
     std::map<std::string, std::string> properties;
@@ -101,27 +102,3 @@ char* getProperty(std::string key)
     return convertToChar(value);
 }
 
-/*
-int main(int argc, char* argv[])
-{
-    loadProperties();
-
-    std::cout << "After loadProperties(), merchantProperties contents follow." << std::endl;
-
-    std::map<std::string, std::string>::iterator it;
-
-    for (it = merchantProperties.begin(); it != merchantProperties.end(); it++)
-    {
-        std::cout << it->first    // string (key)
-            << ':'
-            << it->second   // string's value 
-            << std::endl;
-    }
-
-    std::string fullPath = getKeyFilePath();
-
-    std::cout << "getKeyFilePath() returned: " << fullPath << std::endl;
-
-    return 0;
-}
-*/
