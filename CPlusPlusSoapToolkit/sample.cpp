@@ -13,8 +13,8 @@ void sigpipe_handle(int x) {}
 #endif
 
 // Before using this example, replace the generic values with your merchant ID and password. 
-const char *MERCHANT_ID = "cp_staging_portfolio";
-const char *TRANSACTION_KEY = "2LogSkUeZka06aEWHYQAhZCvMQ5rl2BMRb5l2liml+4E1NN7t4MYk/2m4JUzH8kKYXCilP6YGOjxzNU/9HUVE//4NUu2EiH+tJMGSospx8POPqI7sejHopsfjwM0s/UfcgOjq5j5PzxZvHuGbfKV7efNVaC5PdivPoyyuQejaAX5c8NViZ0Jee0twe+kxy8ITvOL08NmrYMiJYU6m+U2nQwMj1ruCiVZ/p79y0zY6wrCiaSjtSIi/BMQca0Bp8KZZgslVerTExY59TEPBb0GZpXg34DkqZAf4lhOhxbOwTmyF/qVIuhqvx7T5qeKAL7Wadoenexug4DumslAgY++SQ==";
+const char *MERCHANT_ID = "your_merchant_id";
+const char *TRANSACTION_KEY = "your_transaction_key";
 const char *SERVER_URL = "https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor";
 const char *LIB_VERSION = "2.8.135"; // gSOAP version
 const char *ENVIRONMENT = "Microsoft Windows 11";
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 	} 
 #endif
 
-	//RCH: all ns2__ lines were originally ns__3, e.g.:
+	//upgrading from previous versions: all ns2__ lines were originally ns__3, e.g.:
 	//ns3__RequestMessage request;
 	ns2__RequestMessage request;
 	
@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
 	ns2__Card card;
 	card.accountNumber = (char *) "4111111111111111";
 
-	//RCH: numeric values were int* before, now they're char*
+	//upgrading from previous versions: numeric values were int* before, now they're char*
 	//due to type mapping changes in newer versions of gsoap/WS/WS-typemap.dat
 	//int expmo = 12;
 	//int expyr = 2020;
@@ -134,11 +134,11 @@ int main(int argc, char* argv[])
 
 	ns2__ReplyMessage reply;
 
-	//RCH: old security code removed
+	//upgrading from previous versions: remove old security code
 	//soap_wsse_add_UsernameTokenText(
 	//	service.soap, NULL, request.merchantID, TRANSACTION_KEY );
 
-	//RCH: add security fields to SOAP header
+	//upgrading from previous versions: add security fields to SOAP header
 	addSecurityTokenAndSignature(service.soap);
 
 	int ret = service.runTransaction(&request, reply);
@@ -165,7 +165,7 @@ int main(int argc, char* argv[])
 			printf( "Error code: %d\nPlease consult the gSOAP documentation.\n", ret );
 	}
 
-	//RCH: cleanup security call
+	//upgrading from previous versions: cleanup security call
 	cleanupSecurityTokenAndSignature();
 
 	return 0;
