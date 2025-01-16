@@ -20,6 +20,7 @@ You must upgrade the SOAP Authentication to use P12 by February 13, 2025.
 > - Java SOAP toolkit
 > - C# SOAP toolkit
 > - PHP SOAP toolkit
+> - C++ SOAP toolkit
 > 
 > Other toolkits will be available in January 2025.
 > 
