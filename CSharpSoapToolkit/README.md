@@ -31,6 +31,9 @@ You must create a P12 certificate. See the [REST Getting Started Developer Guide
 With this change to use a P12 certificate in your C# SOAP toolkit configuration, the new requirements for your application will be:
 
 - .NET Framework 4.7.2 and later Redistributable Package
+
+If using the ToolkitCertificateStore utility then these are the additional requirements for your application:
+
 - [NuGet Command-Line Interface](https://learn.microsoft.com/en-us/nuget/reference/nuget-exe-cli-reference?tabs=windows)
 - Portable.BouncyCastle
 
@@ -52,7 +55,7 @@ Follow these steps to upgrade your existing C# code:
 
 ### Modifying `app.config`
 
-1. Add the following sections to the top of your `app.config` file:
+1. Add the following sections to the top of your `app.config` file (If using the ToolkitCertificateStore utility):
 
    ```xml
    <configuration>
@@ -86,7 +89,7 @@ Follow these steps to upgrade your existing C# code:
    </bindings>
    ```
 
-### Adding new dependency
+### Adding new dependency (If using the ToolkitCertificateStore utility)
 
 1. Add this dependency to the `packages.config` file:
 
@@ -112,16 +115,23 @@ Follow these steps to upgrade your existing C# code:
 
 ### Adding new files to project
 
-1. Add your P12 certificate to the `KEY_DIRECTORY`.
+1. Add your P12 certificate to the `KEY_DIRECTORY`(If using the ToolkitCertificateStore utility).
 
    This `KEY_DIRECTORY` location must be accessible by your code. Ensure that your code has permissions to read this location.
 
 2. Copy these files to your project directory:
-   - [CertificateCacheUtility.cs](CSharpSoapToolkit\CertificateCacheUtility.cs)
    - [InspectorBehavior.cs](CSharpSoapToolkit\InspectorBehavior.cs)
    - [PropertiesUtility.cs](CSharpSoapToolkit\PropertiesUtility.cs)
    - [SecurityUtility.cs](CSharpSoapToolkit\SecurityUtility.cs)
    - [SoapEnvelopeUtility.cs](CSharpSoapToolkit\SoapEnvelopeUtility.cs)
+   - [ISecureCertificateStore.cs](CSharpSoapToolkit\ISecureCertificateStore.cs)
+
+If using the ToolkitCertificateStore utility then copy these addional files:
+   - [ToolkitCertificateStore.cs](CSharpSoapToolkit\ToolkitCertificateStore.cs)
+   - [CertificateCacheUtility.cs](CSharpSoapToolkit\CertificateCacheUtility.cs)
+   - [PropertiesUtility.cs](CSharpSoapToolkit\PropertiesUtility.cs)
+
+If you are not using ToolkitCertificateStore then implement your own secure ISecureCertificateStore
 
 3. Import the files above to your project.
 
@@ -143,7 +153,7 @@ Follow these steps to upgrade your existing C# code:
    ```csharp
    TransactionProcessorClient proc = new TransactionProcessorClient();
 
-   proc.Endpoint.EndpointBehaviors.Add(new InspectorBehavior());
+   proc.Endpoint.EndpointBehaviors.Add(new InspectorBehavior(new ToolkitCertificateStore()));  //or your owm ISecureCertificateStore
 
    ReplyMessage reply = proc.runTransaction(request);
    ```
