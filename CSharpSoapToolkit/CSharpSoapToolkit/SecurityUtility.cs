@@ -10,33 +10,35 @@ namespace CSharpSoapToolkit
 {
     public class SecurityUtility
     {
-        private static readonly IDictionary<string, string> _userDefinedProperties;
+        //private static readonly IDictionary<string, string> _userDefinedProperties;
 
-        static SecurityUtility()
-        {
-            // Load Properties
-            try
-            {
-                _userDefinedProperties = PropertiesUtility.LoadProperties();
-            }
-            catch (IOException e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //static SecurityUtility()
+        //{
+        //    // Load Properties
+        //    try
+        //    {
+        //        _userDefinedProperties = PropertiesUtility.LoadProperties();
+        //    }
+        //    catch (IOException e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
-        public static string GenerateBinarySecurityToken()
+        public static string GenerateBinarySecurityToken(ISecureCertificateStore secureCertificateStore)
         {
-            var certificate = ExtractMerchantCertificateFromFile();
+            //var certificate = ExtractMerchantCertificateFromFile();
+            var certificate = secureCertificateStore.MerchantCertificate;
+
             var certificateBytes = certificate.GetRawCertData();
             return Convert.ToBase64String(certificateBytes);
         }
 
-        private static X509Certificate2 ExtractMerchantCertificateFromFile()
-        {
-            // (i) Get certificate
-            return CertificateCacheUtility.FetchCachedCertificate(PropertiesUtility.GetKeyFilePath(), _userDefinedProperties["KEY_PASS"]);
-        }
+        //private static X509Certificate2 ExtractMerchantCertificateFromFile()
+        //{
+        //    // (i) Get certificate
+        //    return CertificateCacheUtility.FetchCachedCertificate(PropertiesUtility.GetKeyFilePath(), _userDefinedProperties["KEY_PASS"]);
+        //}
 
         public static void CreateDetachedSignature(ref XmlDocument xmlDoc, RSA privateKey, XmlElement securityTokenReference)
         {
@@ -126,9 +128,10 @@ namespace CSharpSoapToolkit
             }
         }
 
-        public static RSA GetKeyFromCertificate()
+        public static RSA GetKeyFromCertificate(ISecureCertificateStore secureCertificateStore)
         {
-            var certificate = CertificateCacheUtility.FetchCachedCertificate(PropertiesUtility.GetKeyFilePath(), _userDefinedProperties["KEY_PASS"]);
+            //var certificate = CertificateCacheUtility.FetchCachedCertificate(PropertiesUtility.GetKeyFilePath(), _userDefinedProperties["KEY_PASS"]);
+            var certificate = secureCertificateStore.MerchantCertificate;
 
             // Get the private key
             var privateKey = certificate.GetRSAPrivateKey();

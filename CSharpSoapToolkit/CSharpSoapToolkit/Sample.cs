@@ -68,7 +68,7 @@ namespace CSharpSoapToolkit
             {
                 TransactionProcessorClient proc = new TransactionProcessorClient();
 
-                proc.Endpoint.EndpointBehaviors.Add(new InspectorBehavior());
+                proc.Endpoint.EndpointBehaviors.Add(new InspectorBehavior(new ToolkitCertificateStore())); //or your owm ISecureCertificateStore
 
                 ReplyMessage reply = proc.runTransaction(request);
 

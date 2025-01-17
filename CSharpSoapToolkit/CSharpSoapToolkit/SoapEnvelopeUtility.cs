@@ -6,7 +6,7 @@ namespace CSharpSoapToolkit
 {
     public class SoapEnvelopeUtility
     {
-        public static void AddSecurityElements(ref Message request)
+        public static void AddSecurityElements(ref Message request, ISecureCertificateStore secureCertificateStore)
         {
             // (i) Import Request into XmlDocument
             XmlDocument xmlDoc = new XmlDocument { PreserveWhitespace = true };
@@ -52,7 +52,7 @@ namespace CSharpSoapToolkit
             XmlAttribute tokenElementAttribute = xmlDoc.CreateAttribute("wsu", "Id", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");
             tokenElementAttribute.Value = "X509Token";
             tokenElement.Attributes.Append(tokenElementAttribute);
-            tokenElement.InnerXml = SecurityUtility.GenerateBinarySecurityToken();
+            tokenElement.InnerXml = SecurityUtility.GenerateBinarySecurityToken(secureCertificateStore);
 
             // (v) Add Security envelope
             XmlElement securityElement = xmlDoc.CreateElement("wsse", "Security", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd");
@@ -67,7 +67,7 @@ namespace CSharpSoapToolkit
             securityTokenReferenceElement.AppendChild(referenceElement);
 
             // (vii) Combine Binary Security Token with Signature
-            SecurityUtility.CreateDetachedSignature(ref xmlDoc, SecurityUtility.GetKeyFromCertificate(), securityTokenReferenceElement);
+            SecurityUtility.CreateDetachedSignature(ref xmlDoc, SecurityUtility.GetKeyFromCertificate(secureCertificateStore), securityTokenReferenceElement);
 
             // (viii) Export back to Request object
             var memoryStream = new MemoryStream(); // This has to remain open. Do NOT use `using` statement.
