@@ -140,9 +140,9 @@ Follow these steps to upgrade your existing Java code:
 
 6. Copy these files to your project directory:
 
-   - [`BinarySecurityTokenHandler.java`](src/main/java/com/cybersource/stub/BinarySecurityTokenHandler.java)
-   - [`PropertiesUtil.java`](src/main/java/com/cybersource/stub/PropertiesUtil.java)
-   - [`SecurityUtil.java`](src/main/java/com/cybersource/stub/SecurityUtil.java)
+   - [`BinarySecurityTokenHandler.java`](src/main/java/com/cybersource/BinarySecurityTokenHandler.java)
+   - [`PropertiesUtil.java`](src/main/java/com/cybersource/PropertiesUtil.java)
+   - [`SecurityUtils.java`](src/main/java/com/cybersource/SecurityUtils.java)
 
 7. Add a toolkit.properties file in the src/main/resources folder in your project. The toolkit.properties must contain this content:
 
