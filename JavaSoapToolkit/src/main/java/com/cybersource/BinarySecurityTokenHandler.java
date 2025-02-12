@@ -20,12 +20,12 @@ public class BinarySecurityTokenHandler implements SOAPHandler<SOAPMessageContex
         if (outboundProperty) {
             SOAPMessage soapMessage = soapMessageContext.getMessage();
 
-            Boolean isMessageSent = processSoapMessage(soapMessage);
+            soapMessage = processSoapMessage(soapMessage);
         }
         return true;
     }
 
-    public boolean processSoapMessage(SOAPMessage soapMessage) {
+    public SOAPMessage processSoapMessage(SOAPMessage soapMessage) {
         try {
             // (i) Fetch SOAP envelope
             SOAPEnvelope soapEnvelope = soapMessage.getSOAPPart().getEnvelope();
@@ -58,7 +58,7 @@ public class BinarySecurityTokenHandler implements SOAPHandler<SOAPMessageContex
             referenceElement.setAttribute("URI", "#X509Token");
 
             SecurityUtils.createDetachedSignature(securityElement, SecurityUtils.getKeyFromCertificate(), securityTokenReferenceElement);
-            return true;
+            return soapMessage;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
