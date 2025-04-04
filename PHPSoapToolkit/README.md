@@ -10,18 +10,16 @@ As part of ongoing Security Enhancements, we are planning to upgrade the SOAP AP
 - Update the files in your project directory.
 - Add your certificate information to your code.
 
-You must upgrade the SOAP Authentication to use P12 by February 13, 2025.
+You must upgrade the SOAP Authentication to use P12 by August 2025.
 
 > **IMPORTANT** : This update is currently available only for the C#, Java and PHP SOAP Toolkit.
 > 
-> The following updated SDKs are available here on GitHub:
+> The following updated toolkits are available here on GitHub:
 > 
-> - Java SOAP toolkit
-> - C# SOAP toolkit
+> - [Java SOAP toolkit](../JavaSoapToolkit/README.md)
+> - [C# SOAP toolkit](../CSharpSoapToolkit/README.md)
 > - PHP SOAP toolkit
-> - C++ SOAP toolkit
-> 
-> Other toolkits will be available in January 2025.
+> - [C++ SOAP toolkit](../CPlusPlusSoapToolkit/README.md)
 
 ## Prerequisites
 
