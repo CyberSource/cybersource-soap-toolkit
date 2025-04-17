@@ -7,9 +7,12 @@ namespace CSharpSoapToolkit
 {
     public class InspectorBehavior : IEndpointBehavior
     {
-        public InspectorBehavior()
+        private ISecureCertificateStore _secureCertificateStore;
+
+        public InspectorBehavior(ISecureCertificateStore secureCertificateStore)
         {
             // not calling the base implementation
+            _secureCertificateStore = secureCertificateStore;
         }
 
         public void Validate(ServiceEndpoint endpoint)
@@ -29,16 +32,18 @@ namespace CSharpSoapToolkit
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
-            clientRuntime.ClientMessageInspectors.Add(new ClientInspector());
+            clientRuntime.ClientMessageInspectors.Add(new ClientInspector(_secureCertificateStore));
         }
     }
 
     public class ClientInspector : IClientMessageInspector
     {
         public MessageHeader[] Headers { get; set; }
+        private ISecureCertificateStore _secureCertificateStore;
 
-        public ClientInspector(params MessageHeader[] headers)
+        public ClientInspector(ISecureCertificateStore secureCertificateStore, params MessageHeader[] headers)
         {
+            _secureCertificateStore = secureCertificateStore;
             Headers = headers;
         }
 
@@ -53,7 +58,7 @@ namespace CSharpSoapToolkit
                     request.Headers.Insert(0, Headers[i]);
             }
 
-            SoapEnvelopeUtility.AddSecurityElements(ref copy);
+            SoapEnvelopeUtility.AddSecurityElements(ref copy, _secureCertificateStore);
 
             request = copy;
 
