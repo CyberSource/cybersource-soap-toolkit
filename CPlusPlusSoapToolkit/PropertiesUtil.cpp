@@ -43,20 +43,13 @@ bool endsWith(const std::string& str, const std::string& suffix) {
     return std::equal(suffix.rbegin(), suffix.rend(), str.rbegin());
 }
 
-char* convertToChar(std::string string)
-{
-    char* cstr = new char[string.length() + 1]; // allocate memory for the char array
-    strcpy(cstr, string.c_str()); // copy the contents of the std::string to the char array
-    return cstr;
-}
-
-char* getKeyFilePath()
+std::string getKeyFilePath()
 {
     auto keyFileKey = merchantProperties.find("KEY_FILE");
 
     if (keyFileKey == merchantProperties.end()) {
         std::cerr << "Key File is missing in properties file" << std::endl;
-        return (char*)"";
+        return "";
     }
 
     std::string keyFile = keyFileKey->second;
@@ -77,7 +70,7 @@ char* getKeyFilePath()
 
     if (!file.is_open()) {
         std::cerr << "The file " << fullPath << " is missing or is not a file." << std::endl;
-        return (char*)"";
+        return "";
     }
     else {
         file.close();
@@ -85,20 +78,19 @@ char* getKeyFilePath()
 
     std::cout << "keyFile full path: " << fullPath << std::endl;
 
-    return convertToChar(fullPath);
+    return fullPath;
 }
 
-char* getProperty(std::string key)
+std::string getProperty(std::string key)
 {
     auto keyFileKey = merchantProperties.find(key);
 
     if (keyFileKey == merchantProperties.end()) {
         std::cerr << "Property is missing in properties file: " << key << std::endl;
-        return (char *) "";
+        return "";
     }
 
     std::string value = keyFileKey->second;
 
-    return convertToChar(value);
+    return value;
 }
-

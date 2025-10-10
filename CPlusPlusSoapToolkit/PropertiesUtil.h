@@ -13,7 +13,7 @@ extern std::map<std::string, std::string> merchantProperties;
 
 // Function declarations
 std::map<std::string, std::string> loadProperties();
-char* getKeyFilePath();
-char* getProperty(std::string key);
+std::string getKeyFilePath();
+std::string getProperty(std::string key);
 
 #endif // PROPERTIESUTIL_H

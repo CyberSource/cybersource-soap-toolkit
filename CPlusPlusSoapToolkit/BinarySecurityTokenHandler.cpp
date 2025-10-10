@@ -170,7 +170,7 @@ int addSecurityTokenAndSignature(struct soap* soap)
 
     //Read pkcs12
     BIO* bio1;
-    bio1 = BIO_new_file(getKeyFilePath(), "rb");
+    bio1 = BIO_new_file(getKeyFilePath().c_str(), "rb");
 
     if (!bio1) {
         std::cerr << "Error opening file: " << getKeyFilePath() << std::endl;
@@ -189,7 +189,7 @@ int addSecurityTokenAndSignature(struct soap* soap)
     pkey1 = NULL;
     cert1 = NULL;
     ca = NULL;
-    const char* password = getProperty("KEY_PASS");
+    const char* password = getProperty("KEY_PASS").c_str();
 
     if (!PKCS12_parse(p12, password, &pkey1, &cert1, &ca)) {
         ERR_print_errors_fp(stderr);
