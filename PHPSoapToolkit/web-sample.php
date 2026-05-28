@@ -101,8 +101,8 @@
         printf("requestToken = $reply->requestToken<br/>");
         printf("ccAuthReply->reasonCode = " . $reply->ccAuthReply->reasonCode . "<br/>");
     } catch (SoapFault $exception) {
-        var_dump(get_class($exception));
-        var_dump($exception);
+        error_log("SOAP Fault - " . get_class($exception) . ": " . $exception->getMessage());
+        echo "<p style='color: red;'>An error occurred while processing your request. Please try again later or contact support.</p>";
     }
     ?>
 
