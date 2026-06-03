@@ -51,15 +51,8 @@ class SecurityUtility
      */
     function canonicalizeXML($data)
     {
-        $result = '';
-        $fname = tempnam(sys_get_temp_dir(), 'temporaryBinarySecurityToken');
-        $f = fopen($fname, 'w+');
-        fwrite($f, $data);
-        fclose($f);
-
         $tempFile = new DOMDocument('1.0', 'utf-8');
-        $tempFile->load($fname);
-        unlink($fname);
+        $tempFile->loadXML($data);
 
         $result = $tempFile->C14N(true, true);
 

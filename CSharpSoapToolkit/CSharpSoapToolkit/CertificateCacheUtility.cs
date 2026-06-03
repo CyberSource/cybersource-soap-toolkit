@@ -58,7 +58,7 @@ namespace CSharpSoapToolkit
             {
                 if (e.Message.Equals("The specified network password is not correct.\r\n"))
                 {
-                    throw new Exception($"KeyPassword provided:{keyPassword} is incorrect");
+                    throw new Exception($"The provided KeyPassword is incorrect. Please check the configuration and provide correct value.");
                 }
 
                 throw e;

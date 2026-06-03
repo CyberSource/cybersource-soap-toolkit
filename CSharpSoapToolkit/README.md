@@ -90,7 +90,7 @@ Follow these steps to upgrade your existing C# code:
 
    ```xml
    <packages>
-      <package id="Portable.BouncyCastle" version="1.9.0" targetFramework="net472" />
+      <package id="BouncyCastle.Cryptography" version="2.6.2" targetFramework="net472" />
    </packages>
    ```
 
@@ -101,9 +101,9 @@ Follow these steps to upgrade your existing C# code:
 
 3. Add this package reference to your `.csproj` file:
    ```xml
-   <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
-   </Reference>
+   <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>packages\BouncyCastle.Cryptography.2.6.2\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
    ```
 
 > **NOTE** : These steps can also be done through Visual Studio Package Manager.

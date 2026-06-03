@@ -957,7 +957,7 @@ extern intmax_t __strtoull(const char*, char**, int);
 #endif
 
 /* Uncomment to debug sending (in file SENT.log) receiving (in file RECV.log) and internal operations (in file TEST.log) */
-#define DEBUG 
+// #define DEBUG 
 
 /* #define DEBUG_STAMP */ /* Uncomment to debug sending (in file SENT.log) receiving (in file RECV.log) and time-stamped operations (in file TEST.log) */
 
